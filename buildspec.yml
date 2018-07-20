@@ -1,13 +1,11 @@
 version: 0.2
 
 phases:
-  install:
-    commands:
-      - apt-get install -y docker-ce
   pre_build:
     commands:
       - echo mvn version
       - mvn -version
+      - docker version
   post_build:
     commands:
       - echo Build completed on `date`
