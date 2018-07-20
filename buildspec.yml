@@ -5,6 +5,7 @@ phases:
     commands:
       - echo mvn version
       - mvn -version
+      - service docker start
       - docker version
   post_build:
     commands:
