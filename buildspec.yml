@@ -1,10 +1,22 @@
 version: 0.2
 
 phases:
-  post_build:
+  install:
+    commands:
+      - nohup /usr/local/bin/dockerd --host=unix:///var/run/docker.sock --host=tcp://127.0.0.1:2375 --storage-driver=overlay&
+      - timeout -t 15 sh -c "until docker info; do echo .; sleep 1; done"
+  pre_build:
+    commands:
+      - echo Logging in to Amazon ECR...
+      - $(aws ecr get-login --no-include-email --region ap-southeast-1)    
+  build:
     commands:
       - echo Build completed on `date`
       - mvn package
+      - echo Build started on `date`
+      - echo Building the Docker image...          
+      - docker build -t myrepo:latest . 
+      - docker tag myrepo:latest 139379777393.dkr.ecr.ap-southeast-1.amazonaws.com/myrepo:latest              
 artifacts:
   files:
     - target/spring-boot-rest-example-0.5.0.war
