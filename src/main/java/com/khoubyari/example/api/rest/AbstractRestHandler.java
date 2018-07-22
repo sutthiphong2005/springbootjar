@@ -45,7 +45,7 @@ public abstract class AbstractRestHandler implements ApplicationEventPublisherAw
     RestErrorInfo handleResourceNotFoundException(ResourceNotFoundException ex, WebRequest request, HttpServletResponse response) {
         log.info("ResourceNotFoundException handler:" + ex.getMessage());
 
-        return new RestErrorInfo(ex, "Sorry I couldn't find it.");
+        return new RestErrorInfo(ex, "Sorry I couldn't find it. jun");
     }
 
     @Override
