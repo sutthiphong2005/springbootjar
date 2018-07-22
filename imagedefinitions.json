@@ -1,0 +1,6 @@
+[
+    {
+        "name": "springboot-app",
+        "imageUri": "139379777393.dkr.ecr.ap-southeast-1.amazonaws.com/myrepo:latest"
+    }
+]
