@@ -21,7 +21,7 @@ phases:
     commands:
       - echo Build completed on `date`
       - echo Pushing the Docker image...
-      - docker push 139379777393.dkr.ecr.ap-southeast-1.amazonaws.com/myrepo:latest 
+      - docker push 139379777393.dkr.ecr.ap-southeast-1.amazonaws.com/workshop:latest 
       - printf '[{"name":"springcontainer","imageUri":"%s"}]' 139379777393.dkr.ecr.ap-southeast-1.amazonaws.com/workshop:latest > imagedefinitions.json   
 artifacts:
   files:
