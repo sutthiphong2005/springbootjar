@@ -16,13 +16,13 @@ phases:
       - echo Build started on `date`
       - echo Building the Docker image...          
       - docker build -t myrepo:latest . 
-      - docker tag myrepo:latest 139379777393.dkr.ecr.ap-southeast-1.amazonaws.com/myrepo:latest
+      - docker tag myrepo:latest 139379777393.dkr.ecr.ap-southeast-1.amazonaws.com/workshop:latest
   post_build:
     commands:
       - echo Build completed on `date`
       - echo Pushing the Docker image...
       - docker push 139379777393.dkr.ecr.ap-southeast-1.amazonaws.com/myrepo:latest 
-      - printf '[{"name":"springcontainer","imageUri":"%s"}]' 139379777393.dkr.ecr.ap-southeast-1.amazonaws.com/myrepo:latest > imagedefinitions.json   
+      - printf '[{"name":"springcontainer","imageUri":"%s"}]' 139379777393.dkr.ecr.ap-southeast-1.amazonaws.com/workshop:latest > imagedefinitions.json   
 artifacts:
   files:
     - target/spring-boot-rest-example-0.5.0.war
