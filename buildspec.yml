@@ -4,7 +4,7 @@ phases:
   install:
     commands:
       - nohup /usr/local/bin/dockerd --host=unix:///var/run/docker.sock --host=tcp://127.0.0.1:2375 --storage-driver=overlay&
-      - timeout 16 sh -c "until docker info; do echo .; sleep 1; done"
+      - timeout 15 sh -c "until docker info; do echo .; sleep 1; done"
   pre_build:
     commands:
       - echo Logging in to Amazon ECR...
@@ -16,13 +16,13 @@ phases:
       - echo Build started on `date`
       - echo Building the Docker image...          
       - docker build -t myrepo:latest . 
-      - docker tag myrepo:latest 139379777393.dkr.ecr.ap-southeast-1.amazonaws.com/workshop:latest
+      - docker tag myrepo:latest 139379777393.dkr.ecr.ap-southeast-1.amazonaws.com/myrepo:latest
   post_build:
     commands:
       - echo Build completed on `date`
       - echo Pushing the Docker image...
-      - docker push 139379777393.dkr.ecr.ap-southeast-1.amazonaws.com/workshop:latest 
-      - printf '[{"name":"springbootcontainer","imageUri":"%s"}]' 139379777393.dkr.ecr.ap-southeast-1.amazonaws.com/workshop:latest > imagedefinitions.json   
+      - docker push 139379777393.dkr.ecr.ap-southeast-1.amazonaws.com/myrepo:latest 
+      - printf '[{"name":"springcontainer","imageUri":"%s"}]' 139379777393.dkr.ecr.ap-southeast-1.amazonaws.com/myrepo:latest > imagedefinitions.json   
 artifacts:
   files:
     - target/spring-boot-rest-example-0.5.0.war
